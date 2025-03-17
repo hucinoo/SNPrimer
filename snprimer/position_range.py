@@ -27,7 +27,7 @@ class PositionRange:
         return self.end - self.start
 
     def search_snp(self):
-        for hit in myvariant.MyVariantInfo().query(f"{self.chr}:{self.start}-{self.end}", fields="dbsnp")["hits"]:
+        for hit in myvariant.MyVariantInfo().query(f"{self.chr}:{self.start}-{self.end}&hg38=true", fields="dbsnp")["hits"]:
             if (
                 "dbsnp" in hit.keys() and "alleles" in hit["dbsnp"]
             ):  # SNP with no alleles informations are not processed
