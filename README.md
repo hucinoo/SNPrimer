@@ -1,6 +1,6 @@
 # SNPrimer
 
-Small python library to search snp in primer by position or by sequence. Updated for searching variants with MyVariant in hg38 annotation. 
+Small python library to search snp in primer by position or by sequence. 
 
 ## Installation
 
