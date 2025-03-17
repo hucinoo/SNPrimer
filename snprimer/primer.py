@@ -28,6 +28,28 @@ class Primer:
                     self.hybridization_place.append(
                         PositionRange(hit["chromosome"], hit["start"], hit["end"], hit["strand"], init_snp=False)
                     )
+    def infos(self, max_vaf=0.1):
+        is_ok = True
+        if len(self.position_ranges) > 1:
+            is_ok = False
+            print(f"{self.seq} has multiple potential hybridation sites in the genome.")
+        for position_range in self.position_ranges:
+            true_snp = position_range.get_snp(max_vaf)
+            if true_snp:
+                print(f"{self.seq} has snp with vaf > {max_vaf} : {true_snp} ")
+                is_ok = False
+        if is_ok:
+            print(f"{self.seq} is ok")
+
+    def load_all_snps(self):
+        for position in self.position_ranges:
+            position.search_snp()
+        return self.position_ranges
+
+
+if __name__ == "__main__":
+    a = Primer("CACACAGATCAGAGGGCCAAC")
+    a.infos(0)
 
 
 if __name__ == "__main__":
